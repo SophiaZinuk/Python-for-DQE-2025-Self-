@@ -153,5 +153,3 @@ if __name__ == '__main__':
             break
         pub.date_input_control()
         pub.create_post()
-
-        

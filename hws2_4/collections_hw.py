@@ -41,7 +41,7 @@ def generate_list_of_dicts():
 # create an example of this list and assign it to a value to save it
 ex_dict = generate_list_of_dicts()
 # display this list
-print(ex_dict)
+# print(ex_dict)
 
 
 # --------------------- Task 2 ---------------------
@@ -82,4 +82,4 @@ def generate_common_dict(list_of_dicts):
     return common_dict
 
 # check with previously saved list
-print(generate_common_dict(ex_dict))
+# print(generate_common_dict(ex_dict))
