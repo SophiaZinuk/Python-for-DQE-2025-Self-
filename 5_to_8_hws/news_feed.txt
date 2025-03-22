@@ -1,0 +1,28 @@
+News feed:
+
+----------News----------
+Something happened! (2025-10-10)
+London, 2025-03-18 23:29:58.652544
+
+
+
+----------News----------
+Quality text with UPPER LETTERS IN IT (2025-03-22)
+Zhytomyr, 2025-03-22 22:46:01.435911
+
+
+
+----------News----------
+Quality text with UPPER LETTERS IN IT (2025-03-22)
+Zhytomyr, 2025-03-22 22:46:37.890575
+
+
+
+----------Weather Forecast----------
+For London, 2025-03-23
+As of Sunday, March 23, 2025, London is experiencing a significant change in weather conditions. Following a recent warm spell with temperatures reaching up to 21°C, the Met Office has issued warnings for severe weather, including hail, thunderstorms, and up to nine hours of rain. These conditions are expected to lead to localized flooding in some areas.
+Temperature: 21
+Advice: Wear a swim suit :)
+
+
+

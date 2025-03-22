@@ -5,6 +5,7 @@ import sys
 from re import split as sp
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from hws2_4.string_object import sentence_correction
+from CsvCreator import CsvCreator
  
  
 class Publication(ABC):
@@ -46,6 +47,14 @@ class Publication(ABC):
         while not number.isdigit():
             number = input("Enter a number: ")
         return number
+    
+    @staticmethod
+    def input_file_path_with_validation(message):
+        file_path = input(message)
+        while not os.path.exists(file_path):
+            file_path = input("The path does not exist. Please enter a valid file path: ")
+        return file_path
+    
  
  
  
@@ -143,24 +152,21 @@ class PublicationClassifier:
         'news': { 'news', 'headline', 'report', 'reporter', 'journal', 'journalist',
         'breaking', 'update', 'live', 'coverage', 'announcement',
         'exclusive', 'interview', 'media', 'daily', 'broadcast', 'channel',
-        'editorial', 'alert', 'developing', 'latest', 'current events',
+        'editorial', 'alert', 'developing', 'latest',
         'newspaper', 'press', 'article', 'source', 'coverage',
         'trending', 'event', 'public', 'statement', 'reveal', 'expose',
         'anchor', 'bulletin', 'issue', 'publication', 'column'},
 
         'privatead': {'ad', 'advertisement', 'advertising', 'promo', 'promotion',
-        'sell', 'buy', 'discount', 'offer', 'deal', 'limited time',
-        'best price', 'bargain', 'order now', 'shop', 'shopping',
-        'save', 'clearance', 'free trial', 'exclusive', 'coupon',
-        'special offer', 'hurry', 'now available', 'subscribe', 'pricing',
-        'available', 'get yours', 'gift', 'investment', 'purchase'},
+        'sell', 'buy', 'discount', 'offer', 'deal', 'bargain', 'shop', 'shopping',
+        'save', 'clearance', 'exclusive', 'coupon', 'hurry', 'subscribe', 'pricing',
+        'available', 'gift', 'investment', 'purchase'},
    
         'weather': {'weather', 'forecast', 'temperature', 'rain', 'rainy', 'snow', 'snowfall',
         'cloudy', 'sunny', 'storm', 'stormy', 'wind', 'windy', 'humidity',
         'climate', 'hot', 'cold', 'freezing', 'thunder', 'lightning',
-        'degrees', 'conditions', "today's weather", "tonight's forecast",
-        'precipitation', 'heatwave', 'chilly', 'warm', 'air pressure', 'uv index',
-        'tornado', 'hail', 'fog', 'drizzle', 'meteorologist', 'weather report'}
+        'degrees', 'conditions', 'precipitation', 'heatwave', 'chilly', 'warm',
+        'tornado', 'hail', 'fog', 'drizzle', 'meteorologist'}
     }
  
     @staticmethod
@@ -175,7 +181,7 @@ class PublicationClassifier:
 class TextDivider:
     def __init__(self, divider):
         self.divider = divider
- 
+
     def split_file(self, file_path):
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
@@ -195,18 +201,27 @@ class FilePublication:
         self.path = path
         self.num_of_publ = num_of_publ
         self.direction = direction
+
+        self.blocks_number = len(TextDivider('\n\n\n').split_file(self.path))
+
+    @staticmethod
+    def input_num_of_publ_with_validation(message, path):
+        num = input(message)
+        while not num.isdigit() or int(num) > len(TextDivider('\n\n\n').split_file(path)):
+            num = input("There are not that many number of publications in this file or you entered not a number. Enter another number: ")
+        return num
  
  
     @staticmethod
     def initialize_from_user_input():
         is_custom_path = input('Do you want to use a custom path? (y/n): ')
         if is_custom_path == 'y':
-            path = input('Enter the path to the file: ')
+            path = Publication.input_file_path_with_validation('Enter the path to the file: ')
         else:
             path = r'ex1.txt'
  
-        num_of_publ = int(input('Enter number of publications you want to publish from the file: '))
-        direction = input('Specify from what end you want to take publications: \n 1 - from the beginning \n 2 - from the end\n')
+        num_of_publ = int(FilePublication.input_num_of_publ_with_validation(f'Enter number of publications you want to publish from the file: ', path))
+        direction = input('Specify from what end you want to take publications: \n 1 - from the beginning \n 2 - from the end ')
         return FilePublication(num_of_publ, direction, path)
    
     def add_post_to_feed(self):
@@ -231,12 +246,16 @@ class FilePublication:
                 text_left = list_of_blocks[:-self.num_of_publ]
             with open(self.path, 'w') as f:
                 f.write('\n\n\n'.join(text_left))
+
+    def remove_empty_file(self):
+        if os.path.exists(self.path) and os.path.getsize(self.path) == 0:
+            os.remove(self.path)
  
  
  
 if __name__ == '__main__':  
     while True:
-        publication_method = input(f'''Enter publication method: \n 1 - input from the keyboard \n 2 - download from file with default path
+        publication_method = input(f'''Enter publication method: \n 1 - input from the keyboard \n 2 - download from file
                                  \n Enter smth else to exit:''')
         if publication_method == '1':
             publication = input(f'Enter the type of publication: \n 1 - news \n 2 - privat ad \n 3 - weather forecast \n Enter smth else to exit: ')
@@ -252,5 +271,15 @@ if __name__ == '__main__':
         elif publication_method == '2':
             pub = FilePublication.initialize_from_user_input()
             pub.add_post_to_feed()
+            pub.remove_empty_file()
         else:
             break
+
+        CsvCreator.update_csvs()
+
+
+
+# 210 string: or vs and
+
+# rewrite classes in different files
+        
