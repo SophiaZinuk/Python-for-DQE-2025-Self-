@@ -1,0 +1,26 @@
+[
+    {
+        "type": "weatherforecast",
+        "city": "Tokyo",
+        "date": "2025-03-23",
+        "text": "Sunny and warm with a high of 68\u00c2\u00b0F (20\u00c2\u00b0C). Light winds expected in the afternoon."
+    },
+    {
+        "type": "weatherforecast",
+        "city": "Chicago",
+        "date": "2025-03-23",
+        "text": "Cloudy with a chance of rain. High of 52\u00c2\u00b0F (11\u00c2\u00b0C), low of 39\u00c2\u00b0F (4\u00c2\u00b0C)."
+    },
+    {
+        "type": "news",
+        "city": "London",
+        "date": "2025-03-22",
+        "text": "Authorities are investigating a major power outage that affected thousands of residents in the north district."
+    },
+    {
+        "type": "weatherforecast",
+        "city": "Tokyo",
+        "date": "2025-03-23",
+        "text": "Sunny and warm with a high of 68\u00c2\u00b0F (20\u00c2\u00b0C). Light winds expected in the afternoon."
+    }
+]

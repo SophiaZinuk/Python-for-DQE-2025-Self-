@@ -21,7 +21,10 @@ class CsvCreator:
         with open(CsvCreator.file_path, 'r') as file:
             text = file.read()
             list_of_letters = sp(r'', text.lower())
-            dict_of_values = {i: list_of_letters.count(i) for i in list_of_letters if i.isalpha()}
+            dict_of_values = {chr(i): 0 for i in range(ord('a'), ord('z') + 1)}
+            for letter in list_of_letters:
+                if letter in dict_of_values.keys():
+                    dict_of_values[letter] += 1
             sum_num = sum(dict_of_values.values())
         return dict_of_values, sum_num
     
@@ -45,3 +48,5 @@ class CsvCreator:
             writer.writeheader()
             for letter, count in CsvCreator.__letter_counter()[0].items():
                 writer.writerow({'letter': letter, 'count_all' : count, 'count_uppercase' : CsvCreator.__upper_letter_counter()[letter], 'percentage, %' : round(count/CsvCreator.__letter_counter()[1]*100, 2)})
+
+# print(CsvCreator.letter_counter())
