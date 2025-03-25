@@ -23,4 +23,4 @@ class News(Publication):
                 f.write("News feed:\n\n")
    
         with open(file_path, 'a') as f:
-            f.write(f'----------News----------\n{self.text} ({self.date})\n{self.city}, {datetime.now()}\n\n\n\n')
+            f.write(f'----------News----------\n{self.text} \n{self.city}, {self.date}\n\n\n\n')

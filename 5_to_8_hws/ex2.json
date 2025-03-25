@@ -1,0 +1,20 @@
+[
+    {
+        "type": "news",
+        "city": "Zhytomyr",
+        "date": "2025-03-22",
+        "text": "Ho-Ho-Ho"
+    },
+    {
+        "type": "privatad",
+        "date": "2025-03-21",
+        "text": "It's spring!!!"
+    },
+    {
+        "type": "weatherforecast",
+        "city": "Odessa",
+        "date": "2025-03-23",
+        "text": "It's sunny",
+        "temperature": 21
+    }
+]
