@@ -29,7 +29,7 @@ class TxtFilePublication(FilePublication):
             path = r'ex1.txt'
  
         num_of_publ = int(TxtFilePublication.input_num_of_publ_with_validation(f'Enter number of publications you want to publish from the file: ', path))
-        direction = input('Specify from what end you want to take publications: \n 1 - from the beginning \n 2 - from the end ')
+        direction = FilePublication.input_direction_with_validation('Specify from what end you want to take publications: \n 1 - from the beginning \n 2 - from the end ')
         return TxtFilePublication(num_of_publ, direction, path)
    
     def add_post_to_feed(self):

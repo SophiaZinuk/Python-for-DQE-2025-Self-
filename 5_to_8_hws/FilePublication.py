@@ -21,4 +21,12 @@ class FilePublication(ABC):
     @abstractmethod
     def input_num_of_publ_with_validation(self):
         pass
+
+    @staticmethod
+    def input_direction_with_validation(message):
+        direction = input(message)
+        while direction not in ('1', '2'):
+            direction = input('Please enter 1 or 2 for direction: \n 1 - from the beginning(default) \n 2 - from the end ')
+
+        return direction
     

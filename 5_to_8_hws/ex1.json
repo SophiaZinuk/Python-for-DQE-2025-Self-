@@ -6,9 +6,9 @@
         "text": "The mayor announced a new public transport initiative aimed at reducing city traffic and emissions."
     },
     {
-        "type": "privatad",
+        "type": "privatead",
         "city": "Los Angeles",
-        "date": "2025-03-21",
+        "actual_until_date": "2025-03-21",
         "text": "Spring Sale! Get up to 50% off on all items at Sunset Mall this weekend only."
     },
     {

@@ -142,7 +142,7 @@ class WeatherForecast(Publication):
 
 if __name__ == '__main__':  
     while True:
-        publication = input(f'Enter the type of publication: \n 1 - news \n 2 - privat ad \n 3 - weather forecast \n Enter smth else to exit: ')
+        publication = input(f'Enter the type of publication: \n 1 - news \n 2 - private ad \n 3 - weather forecast \n Enter smth else to exit: ')
         if publication == '1':
             pub  = News.initialize_from_user_input()
         elif publication == '2':

@@ -1,18 +1,33 @@
 News feed:
 
 
+----------News----------
+Carrrrrrrssss (2025-03-24)
+London, 2025-03-23 23:16:13.105094
 
-----------Weatherforecast----------
-City: Chicago
-Date: 2025-03-23
-Text: Cloudy with a chance of rain. high of 52â°f (11â°c), low of 39â°f (4â°c).
+
+
+----------Private Ad----------
+BIKE WHO WANTS
+Actual until: 2025-03-30, 7 days left
 
 
 
 ----------News----------
-City: London
+City: Zhytomyr
 Date: 2025-03-22
-Text: Authorities are investigating a major power outage that affected thousands of residents in the north district.
+Text: Ho-ho-ho
+
+
+
+----------Privatead----------
+Actual_until_date: 2025-03-21
+Text: It's spring!!!
+
+
+
+----------Weather----------
+The weather promises to be cloudy and windy today in london. It's better to take an umbrella with you, cause the probability of precipitation is 60%!
 
 
 
