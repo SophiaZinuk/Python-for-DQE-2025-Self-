@@ -1,6 +1,5 @@
 from FilePublication import FilePublication
 import json
-from Publication import Publication
 import os
 
 
@@ -70,7 +69,7 @@ class JsonFilePublication(FilePublication):
                     f.write(f'----------{block["type"].capitalize()}----------\n')
                     for key, value in block.items():
                         if key != 'type':
-                            f.write(f'{key.capitalize()}: {value.capitalize()}\n')
+                            f.write(f'{key.capitalize()}: {value}\n')
                     f.write('\n\n\n')
 
                 data_left = data[self.num_of_publ:]

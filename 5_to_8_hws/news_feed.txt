@@ -1,25 +1,6 @@
 News feed:
 
 
-----------News----------
-Carrrrrrrssss (2025-03-24)
-London, 2025-03-23 23:16:13.105094
-
-
-
-----------Private Ad----------
-BIKE WHO WANTS
-Actual until: 2025-03-30, 7 days left
-
-
-
-----------News----------
-City: Zhytomyr
-Date: 2025-03-22
-Text: Ho-ho-ho
-
-
-
 ----------Privatead----------
 Actual_until_date: 2025-03-21
 Text: It's spring!!!
@@ -28,6 +9,5 @@ Text: It's spring!!!
 
 ----------Weather----------
 The weather promises to be cloudy and windy today in london. It's better to take an umbrella with you, cause the probability of precipitation is 60%!
-
 
 

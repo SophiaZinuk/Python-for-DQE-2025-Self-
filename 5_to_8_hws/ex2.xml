@@ -1,0 +1,11 @@
+<data>
+    <news object="sport">
+        <city>Zhytomyr</city>
+        <date>2025-03-28</date>
+        <text>There were public bike ride in the city centre. To see the photo use the following link: https:\\...</text>
+    </news>
+    <privatead paid="True">
+        <text>I want to sell my phone. It's ksiomi 9s. My number: 8876543214</text>
+        <actual_until_date>2025-04-10</actual_until_date>
+    </privatead>
+    </data>
