@@ -24,7 +24,8 @@ class TxtFilePublication(FilePublication):
     def initialize_from_user_input():
         is_custom_path = input('Do you want to use a custom path? (y/n): ')
         if is_custom_path == 'y':
-            path = Publication.input_file_path_with_validation('Enter the path to the file: ')
+            path = input('Enter the path to the file: ')
+            path = Publication.input_file_path_with_validation(path)
         else:
             path = r'ex1.txt'
  

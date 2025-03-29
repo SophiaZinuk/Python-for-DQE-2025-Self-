@@ -43,8 +43,7 @@ class Publication(ABC):
         return number
     
     @staticmethod
-    def input_file_path_with_validation(message):
-        file_path = input(message)
-        while not os.path.exists(file_path):
-            file_path = input("The path does not exist. Please enter a valid file path: ")
+    def input_file_path_with_validation(file_path):
+        while not os.path.exists(file_path) or not file_path.__contains__('.txt'):
+            file_path = input("Your file doesn't exist OR file is in invalid format. Enter another path: ")
         return file_path

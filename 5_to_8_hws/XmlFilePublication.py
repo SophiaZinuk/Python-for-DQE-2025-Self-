@@ -42,7 +42,7 @@ class XmlFilePublication(FilePublication):
     @staticmethod
     def input_file_path_with_validation(path):
 
-        while not os.path.exists(path) or not XmlFilePublication.is_xml_valid(path):
+        while not os.path.exists(path) or not path.__contains__('.xml') or not XmlFilePublication.is_xml_valid(path):
             path = input("Your file doesn't exist OR json is in invalid format. Enter another path: ")
 
         return path

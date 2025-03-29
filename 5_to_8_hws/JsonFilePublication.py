@@ -34,7 +34,7 @@ class JsonFilePublication(FilePublication):
     @staticmethod
     def input_file_path_with_validation(path):
 
-        while not os.path.exists(path) or not JsonFilePublication.is_json_valid(json.load(open(path))):
+        while not os.path.exists(path) or not path.__contains__('.json') or not JsonFilePublication.is_json_valid(json.load(open(path))):
             path = input("Your file doesn't exist OR json is in invalid format. Enter another path: ")
 
         return path
