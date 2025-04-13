@@ -1,6 +1,7 @@
 from Publication import Publication
 import os
 from datetime import date, datetime, timedelta
+from DbManager import DbManager
 
 class News(Publication):
     def __init__(self, text, city, date):
@@ -24,3 +25,25 @@ class News(Publication):
    
         with open(file_path, 'a') as f:
             f.write(f'----------News----------\n{self.text} \n{self.city}, {self.date}\n\n\n\n')
+    
+    @DbManager.open_close_manager
+    def insert_data(self):
+        query = '''
+            INSERT INTO feed (
+                type, text, date, fromtxt, fromjson, fromxml,
+                city, temperature, weatheradvice, userinput
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        '''
+        params = (
+            "privatad",
+            self.text,
+            self.date,
+            False,
+            False,
+            False,
+            self.city,
+            None,
+            None,
+            True
+        )
+        return query, params

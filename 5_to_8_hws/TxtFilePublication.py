@@ -4,6 +4,7 @@ from TextDivider import TextDivider
 import os
 from string_object import sentence_correction
 from PublicationClassifier import PublicationClassifier
+from DbManager import DbManager
 
 
 class TxtFilePublication(FilePublication):
@@ -55,6 +56,21 @@ class TxtFilePublication(FilePublication):
                 text_left = list_of_blocks[:-self.num_of_publ]
             with open(self.path, 'w') as f:
                 f.write('\n\n\n'.join(text_left))
+
+
+    def insert_data(self):
+        db = DbManager()
+        list_of_blocks = TextDivider('\n\n\n').split_file(self.path)
+
+        if self.direction == '1':
+            selected_blocks = list_of_blocks[:self.num_of_publ]
+        else:
+            selected_blocks = list_of_blocks[-self.num_of_publ:]
+
+        for block in selected_blocks:
+            corrected_text = sentence_correction(block)
+            block_type = PublicationClassifier.classify(block).capitalize()
+            db.insert_from_txt_block(block_type, corrected_text)
 
     def remove_empty_file(self):
         if os.path.exists(self.path) and os.path.getsize(self.path) == 0:

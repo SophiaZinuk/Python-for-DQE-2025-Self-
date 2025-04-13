@@ -47,3 +47,7 @@ class Publication(ABC):
         while not os.path.exists(file_path) or not file_path.__contains__('.txt'):
             file_path = input("Your file doesn't exist OR file is in invalid format. Enter another path: ")
         return file_path
+    
+    @abstractmethod
+    def insert_data(self):
+        pass

@@ -1,4 +1,5 @@
 from FilePublication import FilePublication
+from DbManager import DbManager
 import json
 import os
 
@@ -85,10 +86,24 @@ class JsonFilePublication(FilePublication):
             with open(self.path, 'w') as f:
                 json.dump(data_left, f, indent=4)
                 self.blocks_number = self.blocks_number - self.num_of_publ
-    
-    
+
 
     def remove_empty_file(self):
         if os.path.exists(self.path) and self.blocks_number == 0:
             os.remove(self.path)
+
+    
+    def insert_data(self):
+        db = DbManager()
+        data = json.load(open(self.path))
+        data_length = len(data)
+
+        if self.direction == '1':
+            selected_blocks = data[:self.num_of_publ]
+        else:
+            selected_blocks = data[data_length - 1 : data_length - self.num_of_publ -1 : -1]
+
+        for block in selected_blocks:
+            db.insert_from_json_block(block)
+
 

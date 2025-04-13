@@ -11,3 +11,134 @@ Text: It's spring!!!
 The weather promises to be cloudy and windy today in london. It's better to take an umbrella with you, cause the probability of precipitation is 60%!
 
 
+----------News----------
+Text 
+London, 2025-04-12
+
+
+
+----------News----------
+Another text 
+Kiyv, 2025-04-12
+
+
+
+----------Private Ad----------
+AdTEXT IS HERE
+Actual until: 2025-05-05, 23 days left
+
+
+
+----------Weather Forecast----------
+For Aby Dabi, 2025-04-12
+Warm
+Temperature: 30
+Advice: Wear a swim suit :)
+
+
+
+----------News----------
+It's first column! the owner of well-known brand is closing his store. Listen to the interview at the link: http//.....
+
+
+
+----------Privatead----------
+The big discount is waiting for you! in my shop you can find any type of jeans! save this code to have an special offer: secretcode333
+
+
+
+----------Private Ad----------
+AD TEXT FOR TEST
+Actual until: 2025-05-05, 22 days left
+
+
+
+----------Privatead----------
+Text: I want to sell my phone. It's ksiomi 9s. My number: 8876543214
+Actual_until_date: 2025-04-10
+
+
+
+----------News----------
+City: Zhytomyr
+Text: There were public bike ride in the city centre. To see the photo use the fillowing link: https:\...
+Date: 2025-03-28
+
+
+
+----------Private Ad----------
+ANOTHER TEST TEXT
+Actual until: 2025-04-25, 12 days left
+
+
+
+----------Privatead----------
+Text: I want to sell my phone. It's ksiomi 9s. My number: 8876543214
+Actual_until_date: 2025-04-10
+
+
+
+----------News----------
+City: Zhytomyr
+Date: 2025-03-28
+Text: There were public bike ride in the city centre. To see the photo use the following link: https:\\...
+
+
+
+----------Private Ad----------
+FINAL TEXT
+Actual until: 2025-04-17, 4 days left
+
+
+
+----------Weatherforecast----------
+City: Chicago
+Date: 2025-03-23
+Text: Cloudy with a chance of rain. High of 52F (11C), low of 39F (4C).
+Temperature: 11
+
+
+
+----------News----------
+TEXT 
+London, 2025-04-13
+
+
+
+----------Privatead----------
+The big discount is waiting for you! in my shop you can find any type of jeans! save this code to have an special offer: secretcode333
+
+
+
+----------News----------
+esfsdf 
+London, 2025-04-04
+
+
+
+----------News----------
+AHAHAH 
+London, 2025-04-04
+
+
+
+----------News----------
+It's first column! the owner of well-known brand is closing his store. Listen to the interview at the link: http//.....
+
+
+
+----------Weatherforecast----------
+City: Chicago
+Date: 2025-03-23
+Text: Cloudy with a chance of rain. High of 52F (11C), low of 39F (4C).
+Temperature: 11
+
+
+
+----------News----------
+City: Zhytomyr
+Date: 2025-03-28
+Text: There were public bike ride in the city centre. To see the photo use the following link: https:\\...
+
+
+

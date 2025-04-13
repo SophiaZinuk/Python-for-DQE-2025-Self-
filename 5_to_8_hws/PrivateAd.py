@@ -1,6 +1,7 @@
 from Publication import Publication
 from datetime import date, datetime, timedelta
 import os
+from DbManager import DbManager
 
 
 class PrivateAd(Publication):
@@ -30,4 +31,28 @@ class PrivateAd(Publication):
                 f.write("News feed:\n\n")
         with open(file_path, 'a') as f:
             f.write(f'----------Private Ad----------\n{self.text}\nActual until: {self.exp_date}, {self.__calculate_days_left()} days left\n\n\n\n')
+
+
+    @DbManager.open_close_manager
+    def insert_data(self):
+        query = '''
+            INSERT INTO feed (
+                type, text, date, fromtxt, fromjson, fromxml,
+                city, temperature, weatheradvice, userinput
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        '''
+        params = (
+            "privatad",
+            self.text,
+            self.exp_date,
+            False,
+            False,
+            False,
+            None,
+            None,
+            None,
+            True
+        )
+        return query, params
+
  

@@ -1,5 +1,6 @@
 from FilePublication import FilePublication
 import xml.etree.ElementTree as ET
+from DbManager import DbManager
 import os
 
 class XmlFilePublication(FilePublication):
@@ -92,3 +93,17 @@ class XmlFilePublication(FilePublication):
     def remove_empty_file(self):
         if os.path.exists(self.path) and len(self.root) == 0:
             os.remove(self.path)
+
+    def insert_data(self):
+        db = DbManager()
+        xml_file = ET.parse(self.path)
+        root = xml_file.getroot()
+        elements = list(root)
+
+        if self.direction == '1':
+            selected = elements[:self.num_of_publ]
+        else:
+            selected = elements[len(elements) - 1 : len(elements) - self.num_of_publ -1 : -1]
+
+        for element in selected:
+            db.insert_from_xml_block(element)

@@ -1,4 +1,5 @@
 from Publication import Publication
+from DbManager import DbManager
 import os
 
 
@@ -36,3 +37,25 @@ class WeatherForecast(Publication):
         with open(file_path, 'a') as f:
             f.write(f'----------Weather Forecast----------\nFor {self.city}, {self.date}\n{self.text}\nTemperature: {self.temperature}\nAdvice: {self.__generate_advice()}\n\n\n\n')
  
+
+    @DbManager.open_close_manager
+    def insert_data(self):
+        query = '''
+            INSERT INTO feed (
+                type, text, date, fromtxt, fromjson, fromxml,
+                city, temperature, weatheradvice, userinput
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        '''
+        params = (
+            "weatherforecast",
+            self.text,
+            self.date,
+            False,
+            False,
+            False,
+            self.city,
+            self.temperature,
+            self.__generate_advice(),
+            True
+        )
+        return query, params
