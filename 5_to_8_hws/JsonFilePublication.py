@@ -5,7 +5,7 @@ import os
 
 
 class JsonFilePublication(FilePublication):
-    def __init__(self, num_of_publ, direction, path = r'ex1.json'):
+    def __init__(self, num_of_publ, direction, path=r'ex1.json'):
         super().__init__(num_of_publ, direction, path)
 
         self.blocks_number = len(json.load(open(self.path)))
@@ -16,7 +16,7 @@ class JsonFilePublication(FilePublication):
         while not num.isdigit() or int(num) > len(json.load(open(path))):
             num = input("There are not that many number of publications in this file or you entered not a number. Enter another number: ")
         return num
-    
+
     @staticmethod
     def is_json_valid(list_of_dicts):
         publication_type_keys_map = {'news': ['type', 'city', 'text', 'date'], 'privatead': ['type', 'text', 'actual_until_date'], 'weatherforecast': ['type', 'text', 'date', 'city', 'temperature']}
@@ -29,18 +29,12 @@ class JsonFilePublication(FilePublication):
             is_valid = is_valid & (publication_type_keys_map[dict['type']] == keys_list)
 
         return is_valid
-            
 
-    
     @staticmethod
     def input_file_path_with_validation(path):
-
         while not os.path.exists(path) or not path.__contains__('.json') or not JsonFilePublication.is_json_valid(json.load(open(path))):
             path = input("Your file doesn't exist OR json is in invalid format. Enter another path: ")
-
         return path
-
-    
 
     @staticmethod
     def initialize_from_user_input():
@@ -59,7 +53,6 @@ class JsonFilePublication(FilePublication):
         file_path = 'news_feed.txt'
         data = json.load(open(self.path))
         data_length = len(data)
-        
 
         if not os.path.exists(file_path):
             with open(file_path, 'w') as f:
@@ -87,12 +80,10 @@ class JsonFilePublication(FilePublication):
                 json.dump(data_left, f, indent=4)
                 self.blocks_number = self.blocks_number - self.num_of_publ
 
-
     def remove_empty_file(self):
         if os.path.exists(self.path) and self.blocks_number == 0:
             os.remove(self.path)
 
-    
     def insert_data(self):
         db = DbManager()
         data = json.load(open(self.path))
@@ -104,6 +95,13 @@ class JsonFilePublication(FilePublication):
             selected_blocks = data[data_length - 1 : data_length - self.num_of_publ -1 : -1]
 
         for block in selected_blocks:
+            block_text = block.get("text", "")
+            block_type = block.get("type", "")
+
+            # Check for duplicates by both text and type
+            result = db.duplication_validation(block_text, block_type)
+            if result[0][0] > 0:
+                print(f"Duplicate detected: {block_type} with text '{block_text}' already exists in the database.")
+                continue
+
             db.insert_from_json_block(block)
-
-

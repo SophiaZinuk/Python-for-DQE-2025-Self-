@@ -11,6 +11,10 @@ class DbManager:
             try:
                 result = func(self, *args, **kwargs)
 
+                # Skip execution if result is None or (None, None)
+                if result is None or (isinstance(result, tuple) and result[0] is None):
+                    return
+
                 # Support query with optional parameters
                 if isinstance(result, tuple):
                     query, params = result
@@ -19,7 +23,7 @@ class DbManager:
                     query = result
                     cursor.execute(query)
 
-                if query.strip().lower().startswith("select"):
+                if isinstance(query, str) and query.strip().lower().startswith("select"):
                     return cursor.fetchall()
                 else:
                     con.commit()
@@ -69,8 +73,12 @@ class DbManager:
         )
         return query, params
 
-    def duplication_validation(self):
-        pass
+
+    @open_close_manager
+    def duplication_validation(self, text, type):
+        query = "SELECT COUNT(*) FROM feed WHERE text = ? AND type = ?"
+        params = (text, type)
+        return query, params
 
 
     @open_close_manager

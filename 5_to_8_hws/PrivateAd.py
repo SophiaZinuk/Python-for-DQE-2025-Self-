@@ -35,6 +35,11 @@ class PrivateAd(Publication):
 
     @DbManager.open_close_manager
     def insert_data(self):
+        db = DbManager()
+        if db.duplication_validation(self.text, "privatad")[0][0] > 0:
+            print(f"Duplicate detected: Privatead with text '{self.text}' already exists in the database.")
+            return None, None
+    
         query = '''
             INSERT INTO feed (
                 type, text, date, fromtxt, fromjson, fromxml,

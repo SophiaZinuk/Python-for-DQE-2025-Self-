@@ -16,7 +16,7 @@ class PublicationClassifier:
         'save', 'clearance', 'exclusive', 'coupon', 'hurry', 'subscribe', 'pricing',
         'available', 'gift', 'investment', 'purchase'},
    
-        'weather': {'weather', 'forecast', 'temperature', 'rain', 'rainy', 'snow', 'snowfall',
+        'weatherforecast': {'weather', 'forecast', 'temperature', 'rain', 'rainy', 'snow', 'snowfall',
         'cloudy', 'sunny', 'storm', 'stormy', 'wind', 'windy', 'humidity',
         'climate', 'hot', 'cold', 'freezing', 'thunder', 'lightning',
         'degrees', 'conditions', 'precipitation', 'heatwave', 'chilly', 'warm',

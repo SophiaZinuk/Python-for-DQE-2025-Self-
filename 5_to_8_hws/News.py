@@ -28,6 +28,11 @@ class News(Publication):
     
     @DbManager.open_close_manager
     def insert_data(self):
+        db = DbManager()
+        if db.duplication_validation(self.text, "news")[0][0] > 0:
+            print(f"Duplicate detected: News with text '{self.text}' already exists in the database.")
+            return None, None
+    
         query = '''
             INSERT INTO feed (
                 type, text, date, fromtxt, fromjson, fromxml,
@@ -35,7 +40,7 @@ class News(Publication):
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         '''
         params = (
-            "privatad",
+            "news",
             self.text,
             self.date,
             False,

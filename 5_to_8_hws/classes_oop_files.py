@@ -26,7 +26,7 @@ if __name__ == '__main__':
                     break
                 pub.create_post()
                 pub.insert_data()
-                print(dbmanager.run_to_check())
+                # print(dbmanager.run_to_check())
             case '2':
                 pub = TxtFilePublication.TxtFilePublication.initialize_from_user_input()
                 pub.insert_data()
@@ -38,13 +38,13 @@ if __name__ == '__main__':
                 pub.insert_data()
                 pub.add_post_to_feed()
                 pub.remove_empty_file()
-                print(dbmanager.run_to_check())
+                # print(dbmanager.run_to_check())
             case '4':
                 pub = XmlFilePublication.XmlFilePublication.initialize_from_user_input()
                 pub.insert_data()
                 pub.add_post_to_feed()
                 pub.remove_empty_file()
-                print(dbmanager.run_to_check())
+                # print(dbmanager.run_to_check())
             case _:
                 break
 
