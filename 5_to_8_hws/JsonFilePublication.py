@@ -98,10 +98,9 @@ class JsonFilePublication(FilePublication):
             block_text = block.get("text", "")
             block_type = block.get("type", "")
 
-            # Check for duplicates by both text and type
             result = db.duplication_validation(block_text, block_type)
             if result[0][0] > 0:
                 print(f"Duplicate detected: {block_type} with text '{block_text}' already exists in the database.")
                 continue
-
-            db.insert_from_json_block(block)
+            else:
+                db.insert_from_json_block(block)

@@ -109,10 +109,9 @@ class XmlFilePublication(FilePublication):
                     break
             block_type = element.tag
 
-            # Check for duplicates based on both text and type
             result = db.duplication_validation(block_text, block_type)
             if result[0][0] > 0:
                 print(f"Duplicate detected: {block_type} with text '{block_text}' already exists in the database.")
                 continue
-
-            db.insert_from_xml_block(element)
+            else:
+                db.insert_from_xml_block(element)

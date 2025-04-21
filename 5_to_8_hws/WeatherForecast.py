@@ -44,23 +44,17 @@ class WeatherForecast(Publication):
         if db.duplication_validation(self.text, "weatherforecast")[0][0] > 0:
             print(f"Duplicate detected: WeatherForecast with text '{self.text}' already exists in the database.")
             return None, None
-    
-        query = '''
-            INSERT INTO feed (
-                type, text, date, fromtxt, fromjson, fromxml,
-                city, temperature, weatheradvice, userinput
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        '''
-        params = (
-            "weatherforecast",
-            self.text,
-            self.date,
-            False,
-            False,
-            False,
-            self.city,
-            self.temperature,
-            self.__generate_advice(),
-            True
-        )
-        return query, params
+        
+        else:
+            query = '''
+                INSERT INTO weatherforecast (
+                    text, date, city, temperature
+                ) VALUES (?, ?, ?, ?)
+            '''
+            params = (
+                self.text,
+                self.date,
+                self.city,
+                self.temperature
+            )
+            return query, params

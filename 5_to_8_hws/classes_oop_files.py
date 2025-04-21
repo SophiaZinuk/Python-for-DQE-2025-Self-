@@ -11,7 +11,7 @@ from DbManager import DbManager
 if __name__ == '__main__':  
     while True:
         dbmanager = DbManager()
-        dbmanager.create_table()
+        dbmanager.create_tables()
         publication_method = input(f'''Enter publication method: \n 1 - input from the keyboard \n 2 - download from .txt file \n 3 - download from .json file \n 4 - download from .xml file \n Enter smth else to exit: ''')
         match publication_method:
             case '1':
@@ -27,12 +27,13 @@ if __name__ == '__main__':
                 pub.create_post()
                 pub.insert_data()
                 # print(dbmanager.run_to_check())
+                # print(dbmanager.run_to_check_1())
             case '2':
                 pub = TxtFilePublication.TxtFilePublication.initialize_from_user_input()
                 pub.insert_data()
                 pub.add_post_to_feed()
                 pub.remove_empty_file()
-                print(dbmanager.run_to_check())
+                # print(dbmanager.run_to_check())
             case '3':
                 pub = JsonFilePublication.JsonFilePublication.initialize_from_user_input()
                 pub.insert_data()

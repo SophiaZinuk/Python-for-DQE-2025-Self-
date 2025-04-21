@@ -33,91 +33,93 @@ class DbManager:
         return wrapper
 
     @open_close_manager
-    def create_table(self):
-        return '''CREATE TABLE IF NOT EXISTS feed (
-            type varchar(24),
+    def create_tables(self):
+        return '''  CREATE TABLE IF NOT EXISTS news (
             text text,
             date date,
-            fromtxt bool,
-            fromjson bool,
-            fromxml bool,
+            city varchar(32) );
+                    CREATE TABLE IF NOT EXISTS weatherforecast (
+            text text,
+            date date,
             city varchar(32),
-            temperature float,
-            weatheradvice text,
-            userinput bool
-        );'''
+            temperature float );
+                    CREATE TABLE IF NOT EXISTS privatead (
+            text text,
+            date date );
+                    '''
 
     @open_close_manager
     def run_to_check(self):
-        return f'SELECT * FROM feed'
+        return f'SELECT * FROM news'
+    
+    @open_close_manager
+    def run_to_check_1(self):
+        return f'SELECT * FROM privatead'
     
     @open_close_manager
     def insert_from_txt_block(self, block_type, text):
-        query = '''
-            INSERT INTO feed (
-                type, text, date, fromtxt, fromjson, fromxml,
-                city, temperature, weatheradvice, userinput
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        query = f'''
+            INSERT INTO {block_type} (
+                text
+            ) VALUES (?)
         '''
         params = (
-            block_type,
-            text,
-            None,     # date
-            True,     # fromtxt
-            False,    # fromjson
-            False,    # fromxml
-            None,     # city
-            None,     # temperature
-            None,     # weatheradvice
-            False     # userinput
+            text
         )
         return query, params
 
 
     @open_close_manager
     def duplication_validation(self, text, type):
-        query = "SELECT COUNT(*) FROM feed WHERE text = ? AND type = ?"
-        params = (text, type)
+        query = f"SELECT COUNT(*) FROM {type} WHERE text = ?"
+        params = (text)
         return query, params
 
 
     @open_close_manager
     def insert_from_json_block(self, block):
-        query = '''
-            INSERT INTO feed (
-                type, text, date, fromtxt, fromjson, fromxml,
-                city, temperature, weatheradvice, userinput
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        '''
+        match block.get("type"):
+            case "news":
+                query = ''' INSERT INTO news (
+                text, date, city
+            ) VALUES (?, ?, ?) '''
+                
+                params = (
+                    block.get("text"),
+                    block.get("date"),
+                    block.get("city")
+                )
 
-        params = (
-            block.get("type"),
-            block.get("text"),
-            block.get("date") if "date" in block else block.get("actual_until_date"),
-            False,     # fromtxt
-            True,      # fromjson
-            False,     # fromxml
-            block.get("city"),
-            block.get("temperature"),
-            None,
-            False      # userinput
-        )
+            case "privatead":
+                query = ''' INSERT INTO privatead (
+                text, date
+            ) VALUES (?, ?) '''
+                
+                params = (
+                    block.get("text"),
+                    block.get("date")
+                )
+
+            case "weatherforecast":
+                query = ''' INSERT INTO weatherforecast (
+                text, date, city, temperature
+            ) VALUES (?, ?, ?, ?) '''
+                
+                params = (
+                    block.get("text"),
+                    block.get("date"),
+                    block.get("city"),
+                    block.get("temperature")
+                )
 
         return query, params
     
     
     @open_close_manager
     def insert_from_xml_block(self, block):
-        query = '''
-            INSERT INTO feed (
-                type, text, date, fromtxt, fromjson, fromxml,
-                city, temperature, weatheradvice, userinput
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        '''
 
         block_type = block.tag
         params = {
-            'type': block_type,
             'text': None,
             'date': None,
             'city': None,
@@ -130,17 +132,43 @@ class DbManager:
             if tag in params:
                 params[tag] = text
 
-        final_values = (
-            block_type,
-            params['text'],
-            params['date'],
-            False,      # fromtxt
-            False,      # fromjson
-            True,       # fromxml
-            params['city'],
-            float(params['temperature']) if params['temperature'] is not None else None,
-            None,
-            False       # userinput
-        )
+        match block_type:
+            case "news":
+                query = '''
+                    INSERT INTO news (
+                    text, date, city
+                    ) VALUES (?, ?, ?)
+                '''
+
+                final_values = (
+                    params['text'],
+                    params['date'],
+                    params['city']
+                    )
+            case "privatead":
+                query = '''
+                    INSERT INTO privatead (
+                    text, date
+                    ) VALUES (?, ?)
+                '''
+
+                final_values = (
+                    params['text'],
+                    params['date']
+                    )
+                
+            case "weatherforecast":
+                query = '''
+                    INSERT INTO weatherforecast (
+                    text, date, city, temperature
+                    ) VALUES (?, ?, ?, ?)
+                '''
+
+                final_values = (
+                    params['text'],
+                    params['date'],
+                    params['city'],
+                    float(params['temperature'])
+                    )
 
         return query, final_values

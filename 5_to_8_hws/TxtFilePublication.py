@@ -69,13 +69,12 @@ class TxtFilePublication(FilePublication):
             corrected_text = sentence_correction(block)
             block_type = PublicationClassifier.classify(block)
 
-            # Check for duplicates by both text and type before insertion
             result = db.duplication_validation(corrected_text, block_type)
             if result[0][0] > 0:
                 print(f"Duplicate detected. {block_type} with text:\n'{corrected_text}' already exists in the database.\n")
                 continue
-
-            db.insert_from_txt_block(block_type, corrected_text)
+            else:
+                db.insert_from_txt_block(block_type, corrected_text)
 
     def remove_empty_file(self):
         if os.path.exists(self.path) and os.path.getsize(self.path) == 0:

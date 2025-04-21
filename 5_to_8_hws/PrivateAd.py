@@ -36,28 +36,20 @@ class PrivateAd(Publication):
     @DbManager.open_close_manager
     def insert_data(self):
         db = DbManager()
-        if db.duplication_validation(self.text, "privatad")[0][0] > 0:
-            print(f"Duplicate detected: Privatead with text '{self.text}' already exists in the database.")
+        if db.duplication_validation(self.text, "privatead")[0][0] > 0:
+            print(f"Duplicate detected: Private Ad with text '{self.text}' already exists in the database.")
             return None, None
-    
-        query = '''
-            INSERT INTO feed (
-                type, text, date, fromtxt, fromjson, fromxml,
-                city, temperature, weatheradvice, userinput
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        '''
-        params = (
-            "privatad",
-            self.text,
-            self.exp_date,
-            False,
-            False,
-            False,
-            None,
-            None,
-            None,
-            True
-        )
-        return query, params
+        
+        else:
+            query = '''
+                INSERT INTO privatead (
+                    text, date
+                ) VALUES (?, ?)
+            '''
+            params = (
+                self.text,
+                self.exp_date,
+            )
+            return query, params
 
  
